@@ -1,0 +1,50 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ selectedPlayer?.name }}</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img
+      class="modal-image"
+      src="assets/images/{{ selectedPlayer?.image }}"
+      alt="{{ selectedPlayer?.name }}"
+    />
+    <p><strong>Nombre:</strong> {{ selectedPlayer?.name }}</p>
+    <p>
+      <strong>Posición:</strong> {{ selectedPlayer?.position }} ({{
+        selectedPlayer?.position_abbreviate
+      }})
+    </p>
+    <p><strong>Nacionalidad:</strong> {{ selectedPlayer?.nationality }}</p>
+    <p><strong>Dorsal:</strong> {{ selectedPlayer?.dorsal }}</p>
+    <p><strong>Club:</strong> {{ selectedPlayer?.club }}</p>
+    <p><strong>Fecha de Nacimiento:</strong> {{ selectedPlayer?.birthday }}</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="prevPlayer()"
+      [disabled]="isFirstPlayer()"
+      *ngIf="mostrarBotonesNavegacion"
+    >
+      Anterior
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="nextPlayer()"
+      [disabled]="isLastPlayer()"
+      *ngIf="mostrarBotonesNavegacion"
+    >
+      Siguiente
+    </button>
+  </div>
+</ng-template>

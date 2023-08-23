@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <img
+        class="adaptive-image"
+        src="assets/images/{{ equipo?.shield_image }}"
+        alt="Escudo"
+      />
+    </div>
+    <div class="col-md-9 mt-5 p-style">
+      <h1 class="mb-4">{{ equipo?.team_name }}</h1>
+      <p>
+        Ubicación: <strong>{{ equipo?.location_city }}</strong>
+      </p>
+      <p>
+        Fundado en: <strong>{{ equipo?.year_foundation }}</strong>
+      </p>
+      <p class="stadium-name">
+        Estadio: <strong>{{ equipo?.stadium?.name }}</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <img
+        class="adaptive-image"
+        src="assets/images/{{ equipo?.actually_squad_image }}"
+        alt="Escuadra actual"
+      />
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-3 p-3">
+            <img
+              src="assets/images/{{ equipo?.first_wear_image }}"
+              alt="Primera vestimenta"
+              class="adaptive-image-min"
+            />
+          </div>
+          <div class="col-md-9">
+            <div class="card-body">
+              <h5 class="card-title">Primera equipación</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-3 p-3">
+            <img
+              src="assets/images/{{ equipo?.second_wear_image }}"
+              alt="Segunda vestimenta"
+              class="adaptive-image-min"
+            />
+          </div>
+          <div class="col-md-9">
+            <div class="card-body">
+              <h5 class="card-title">Segunda equipación</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5 mb-5 align-items-center">
+    <div class="col-6">
+      <h4>Jugadoras</h4>
+    </div>
+    <div class="col-6 text-right">
+      <input
+        class="form-control"
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Filtrar jugadora por nombre"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-md-2" *ngFor="let jugador of filteredPlayers">
+      <div class="card mb-3" (click)="openPlayerModal(jugador)">
+        <img
+          src="assets/images/{{ jugador.image }}"
+          alt="{{ jugador.name }}"
+          class="card-img-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ jugador.name }}</h5>
+          <p>{{ jugador.position }} ({{ jugador.position_abbreviate }})</p>
+          <p>Nacionalidad: {{ jugador.nationality }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-modal-jugadoras
+    #modalJugadoras
+    [players]="filteredPlayers"
+    [mostrarBotonesNavegacion]="true"
+  ></app-modal-jugadoras>
+</div>

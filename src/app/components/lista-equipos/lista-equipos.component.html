@@ -1,0 +1,64 @@
+<div class="container">
+  <form (submit)="buscarJugadores()">
+    <div class="row">
+      <div class="col-12">
+        <input
+          type="search"
+          [(ngModel)]="terminoBusqueda"
+          placeholder="Buscar jugadora por nombre"
+          name="search"
+        />
+        <button type="submit">Buscar</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Sección para mostrar jugadores filtrados -->
+  <div class="row">
+    <div class="col-md-2" *ngFor="let jugador of jugadoresFiltrados">
+      <div class="card mb-3" (click)="openPlayerModal(jugador)">
+        <img
+          src="assets/images/{{ jugador.image }}"
+          alt="{{ jugador.name }}"
+          class="card-img-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ jugador.name }}</h5>
+          <p class="card-text">
+            {{ jugador.position }} ({{ jugador.position_abbreviate }})
+          </p>
+          <p>Nacionalidad: {{ jugador.nationality }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-modal-jugadoras
+    #modalJugadoras
+    [players]="jugadoresFiltrados"
+    [mostrarBotonesNavegacion]="false"
+  ></app-modal-jugadoras>
+
+  <div class="row">
+    <div
+      class="col-lg-3 col-md-4 col-sm-6"
+      *ngFor="let equipo of equipos"
+      [routerLink]="['/detalle', equipo.slug]"
+    >
+      <div class="card mb-4">
+        <img
+          src="assets/images/{{ equipo.shield_image }}"
+          class="card-img-top shield-image"
+          alt="{{ equipo.team_name }} logo"
+        />
+        <div class="card-body">
+          <h3 class="card-title">{{ equipo.team_name }}</h3>
+          <p class="card-text">Ubicación: {{ equipo.location_city }}</p>
+          <p class="card-text">Fundado en: {{ equipo.year_foundation }}</p>
+          <p class="card-text stadium-name">
+            Estadio: {{ equipo.stadium.name }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
